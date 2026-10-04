@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aquvera | AI-powered financial operations for accounting and audit teams</title>
+<meta name="description" content="Aquvera matches, categorizes, cross-checks and drafts rule-based accounting and audit work. Your professionals review the exceptions and sign off.">
+<meta name="theme-color" content="#faf6ee">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231f3558'/><text x='50' y='68' font-size='58' text-anchor='middle' fill='%23faf6ee' font-family='Georgia,serif'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   Aquvera – styles
+   Palette: creamy white base, deep navy text, teal + brass accents
+   ========================================================== */
+:root{
+  --cream:#faf6ee;      /* page background */
+  --cream2:#f3ecdd;     /* alternate sections, hero */
+  --paper:#fffdf8;      /* cards */
+  --navy:#1f3558;
+  --navy2:#274468;
+  --teal:#2a7f8a;
+  --brass:#b8862f;      /* accent */
+  --ink:#1f2a3c;
+  --mute:#5d6877;
+  --line:#e4dccb;
+  --tint:#e6efe9;
+  --ok:#2c8a5a;
+  --bad:#b8433a;
+  --radius:12px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.65 "Public Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:400;line-height:1.15;margin:0;color:var(--navy)}
+h2{font-size:clamp(28px,4vw,42px);margin-bottom:12px}
+h3{font-size:22px;margin-bottom:6px}
+p{margin:0 0 12px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:84px 0}
+.lede{color:var(--mute);max-width:62ch;font-size:18px}
+.alt{background:var(--cream2);border-block:1px solid var(--line)}
+.note{font-size:13px;color:var(--mute);font-style:italic;margin-top:14px}
+.sr{position:absolute;left:-9999px}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--navy);border-radius:8px;padding:12px 22px;font:600 15px "Public Sans",sans-serif;cursor:pointer;text-decoration:none;background:var(--navy);color:#fff;transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:var(--navy2)}
+.btn.ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+.btn.light{background:#fff;color:var(--navy);border-color:#fff}
+.btn.sm{padding:9px 16px;font-size:14px}
+.btn.full{width:100%}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- Navigation ---------- */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(250,246,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font:500 24px Newsreader,serif;letter-spacing:.3em;text-decoration:none;color:var(--navy)}
+.menu{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14.5px;font-weight:500}
+.menu a{text-decoration:none;color:var(--mute);padding:6px 0;border-bottom:2px solid transparent}
+.menu a:hover{color:var(--navy);border-color:var(--brass)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:42px;height:42px;cursor:pointer;color:var(--navy);align-items:center;justify-content:center}
+.burger svg{width:22px;height:22px}
+
+/* ---------- Hero ---------- */
+.hero{background:var(--cream2);padding:76px 0 92px;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:52px;align-items:center}
+.hero h1{font-size:clamp(38px,5.4vw,62px);margin-bottom:18px}
+.hero p{color:var(--mute);font-size:19px;max-width:46ch}
+.hero .tag{color:var(--teal);font-style:italic;font-family:Newsreader,serif;font-size:22px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+/* ---------- Interactive demo ---------- */
+.demo{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 18px 40px rgba(60,48,20,.12)}
+.demo-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.demo-h b{font-size:15px}.demo-h span{font-size:13px;color:var(--mute)}
+.auto{background:var(--tint);border-radius:8px;padding:10px 12px;font-size:14px;margin-bottom:10px}
+.ex{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:8px;background:#fff;transition:background .3s,border-color .3s}
+.ex.done{background:var(--tint);border-color:var(--teal)}
+.ex.over{border-color:var(--bad)}
+.row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.row strong{font-weight:600}
+.conf{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:#f4e4c2;color:#6d4a0c;white-space:nowrap;align-self:flex-start}
+.why{font-size:13px;color:var(--mute);margin:4px 0 8px}
+.trace{display:none;font-size:12px;background:var(--cream);border-radius:6px;padding:6px 8px;margin-bottom:8px;color:var(--mute)}
+.trace.on{display:block}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.acts button{font:500 13px "Public Sans",sans-serif;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
+.acts button.p{background:var(--navy);color:#fff;border-color:var(--navy)}
+.verdict{font-size:13px;font-weight:600;color:var(--ok)}
+.fin{width:100%;margin-top:6px}
+.fin[disabled]{opacity:.45;cursor:not-allowed}
+
+/* ---------- Grids & cards ---------- */
+.grid{display:grid;gap:18px}
+.g5{grid-template-columns:repeat(5,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card p{color:var(--mute);font-size:15px;margin:0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:32px 0 0}
+.steps li{counter-increment:s;position:relative;padding:20px 20px 20px 62px;border:1px solid var(--line);background:var(--paper);border-radius:var(--radius)}
+.steps li::before{content:counter(s);position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font:500 17px Newsreader,serif}
+.steps li.h{background:var(--navy);color:#fff;border-color:var(--navy)}
+.steps li.h::before{background:var(--brass);color:#fff}
+.steps li.h p{color:#cbd6e6}
+.steps b{display:block;font:500 19px Newsreader,serif;margin-bottom:4px}
+.steps p{font-size:14px;margin:0;color:var(--mute)}
+
+/* ---------- Plans ---------- */
+.plans{margin-top:34px;align-items:stretch}
+.plan{display:flex;flex-direction:column;position:relative;padding:28px 26px}
+.plan h3{font-size:26px}
+.plan .for{color:var(--mute);font-size:15px;margin-bottom:16px}
+.plan ul{list-style:none;padding:0;margin:0 0 24px;flex:1}
+.plan li{position:relative;padding:7px 0 7px 26px;font-size:15px;border-top:1px solid var(--line)}
+.plan li::before{content:"";position:absolute;left:2px;top:14px;width:12px;height:7px;border-left:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(-45deg)}
+.plan.pop{border:2px solid var(--navy);box-shadow:0 14px 34px rgba(31,53,88,.12)}
+.badge{position:absolute;top:-13px;left:26px;background:var(--navy);color:#fff;font:600 12px "Public Sans",sans-serif;padding:4px 12px;border-radius:99px}
+.price{font:400 20px Newsreader,serif;color:var(--brass);margin-bottom:14px}
+.personal{margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;background:var(--navy);color:#fff;border-radius:var(--radius);padding:26px 30px}
+.personal h3{color:#fff;margin-bottom:4px}
+.personal p{color:#cbd6e6;margin:0;max-width:56ch}
+
+/* ---------- ROI calculator ---------- */
+.calc-head{margin-top:72px}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:24px}
+.calc label{display:flex;justify-content:space-between;font-weight:500;font-size:15px;margin-top:18px}
+.calc input[type=range]{width:100%;accent-color:var(--teal)}
+.out{background:var(--navy);color:#fff;border-radius:14px;padding:28px}
+.out .big{font:400 clamp(32px,4.6vw,48px)/1.1 Newsreader,serif;color:#e7c98a}
+.out small{display:block;color:#cbd6e6;font-size:14px;margin:4px 0 18px}
+
+/* ---------- Table / market ---------- */
+.tw{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th{background:var(--navy);color:#fff;text-align:left;padding:12px 16px;font-weight:600}
+td{padding:12px 16px;border-top:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:600}td:nth-child(2){color:var(--mute)}
+.mk{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.mk .card b{display:block;font:400 30px Newsreader,serif;color:var(--teal);margin:2px 0 6px}
+.mk .som b{color:var(--brass)}
+
+/* ---------- Contact ---------- */
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;margin-top:32px;align-items:start}
+.clist{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.clist a{display:flex;gap:14px;align-items:center;text-decoration:none;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;transition:border-color .2s}
+.clist a:hover{border-color:var(--teal)}
+.clist svg{width:22px;height:22px;color:var(--teal);flex:none}
+.clist small{display:block;color:var(--mute);font-size:13px;line-height:1.3}
+.clist b{font-weight:600;line-height:1.3}
+form.card{display:grid;gap:14px;padding:26px}
+form label{display:grid;gap:6px;font-weight:500;font-size:14px}
+form input,form textarea,form select{font:400 15px "Public Sans",sans-serif;border:1px solid var(--line);border-radius:8px;padding:11px 12px;background:#fff;color:var(--ink);width:100%}
+form textarea{min-height:110px;resize:vertical}
+form .hint{font-size:13px;color:var(--mute);margin:0}
+
+/* ---------- Footer ---------- */
+footer{background:var(--navy);color:#b9c8df;font-size:14px;padding:56px 0 0}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:36px;padding-bottom:40px}
+footer .logo{color:#fff;font-size:22px;display:inline-block;margin-bottom:10px}
+footer h4{color:#fff;font:600 15px "Public Sans",sans-serif;margin:0 0 12px}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff;text-decoration:underline}
+footer p{margin:0 0 10px}
+.social{display:flex;gap:10px;margin-top:14px}
+.social a{width:40px;height:40px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:grid;place-items:center;color:#fff}
+.social a:hover{background:rgba(255,255,255,.12);text-decoration:none}
+.social svg{width:19px;height:19px}
+.legal{border-top:1px solid rgba(255,255,255,.14);padding:18px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:#93a6c4}
+
+/* ---------- Enquiry dialog ---------- */
+dialog{border:0;border-radius:16px;padding:0;max-width:480px;width:calc(100% - 32px);background:var(--cream);color:var(--ink);box-shadow:0 30px 70px rgba(20,30,50,.35)}
+dialog::backdrop{background:rgba(25,35,55,.55)}
+.dlg{padding:28px}
+.dlg-x{position:absolute;right:14px;top:12px;background:none;border:0;font-size:28px;line-height:1;cursor:pointer;color:var(--mute)}
+.dlg h3{font-size:28px;padding-right:28px}
+.dlg .num{font:500 34px Newsreader,serif;color:var(--navy);margin:14px 0 4px;display:block;text-decoration:none}
+.dlg .btns{display:grid;gap:10px;margin:16px 0 4px}
+.dlg .pp{margin-top:20px;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:10px}
+.dlg .pp b{display:block;margin-bottom:4px}
+.dlg .pp p{font-size:14px;color:var(--mute);margin:0}
+
+/* ---------- Floating call button (mobile) ---------- */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;display:none}
+.fab .btn{box-shadow:0 10px 24px rgba(31,53,88,.35);border-radius:99px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .hero .wrap,.calc,.g2,.contact{grid-template-columns:1fr}
+  .g5,.g4{grid-template-columns:1fr 1fr}
+  .g3,.mk{grid-template-columns:1fr}
+  section{padding:58px 0}
+  .burger{display:inline-flex}
+  .menu{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--cream);border-bottom:1px solid var(--line);padding:8px 24px 16px}
+  .menu.open{display:flex}
+  .menu a{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+  footer .cols{grid-template-columns:1fr}
+  .fab{display:block}
+  .nav-r .btn{display:none}
+}
+@media (max-width:520px){
+  .g5,.g4{grid-template-columns:1fr}
+  .wrap{padding:0 18px}
+  .personal{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.menu-sw{display:none}
+@media (max-width:960px){.menu-sw{display:block}.menu .menu-sw a{color:var(--navy)}}
+.nav-r .btn,.menu a{white-space:nowrap}
+@media (min-width:961px){.menu{gap:18px}}
+@media (min-width:961px) and (max-width:1120px){.nav-r .btn.ghost{display:none}}
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">AQUVERA</a>
+    <ul class="menu" id="menu">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#trust">Trust</a></li>
+      <li><a href="#plans">Purchase plans</a></li>
+      <li><a href="#market">Market</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="menu-sw"><a data-software target="_blank" rel="noopener" href="#"><b>Try our Aquvera software</b></a></li>
+    </ul>
+    <div class="nav-r">
+      <a class="btn sm" data-software target="_blank" rel="noopener" href="#" aria-label="Try our Aquvera software">Try our software <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <button class="btn sm ghost" data-enquire="">Contact to enquire</button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>The intelligent first layer for accounting and audit.</h1>
+      <p>Aquvera matches, categorizes, cross-checks and drafts the rule-based work. Your professionals review the exceptions and sign off.</p>
+      <p class="tag">The professional keeps the final say.</p>
+      <div class="cta">
+        <a class="btn" data-software target="_blank" rel="noopener" href="#">Try our Aquvera software <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn ghost" href="#plans">Explore purchase plans</a>
+        <a class="btn ghost" href="#demo">Try a sample review</a>
+      </div>
+    </div>
+    <div class="demo" id="demo" aria-label="Interactive sample reconciliation">
+      <div class="demo-h"><b>Bank reconciliation, March</b><span>Sample data</span></div>
+      <div class="auto"><b>412 of 415</b> entries matched automatically. 3 need a person.</div>
+      <div id="exs"></div>
+      <button class="btn fin" id="fin" disabled>Finalize reconciliation</button>
+      <div class="verdict" id="msg" aria-live="polite" style="margin-top:8px"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ PROBLEM ============ -->
+<section id="problem"><div class="wrap">
+  <h2>Skilled professionals are stuck doing rule-based work by hand.</h2>
+  <p class="lede">Five compounding issues keep mid-size accounting and audit firms slow, costly and capped in growth.</p>
+  <div class="grid g5" style="margin-top:32px">
+    <div class="card"><h3>Too much manual work</h3><p>Junior staff spend most of their time on reconciliation, invoice matching and ledger clean-up.</p></div>
+    <div class="card"><h3>Reports rebuilt every time</h3><p>MIS, variance analysis and working papers are drafted from scratch each period.</p></div>
+    <div class="card"><h3>Growth needs more hiring</h3><p>Firms scale by adding staff, so margins stay capped.</p></div>
+    <div class="card"><h3>Tools stop short</h3><p>Tally, Zoho Books and QuickBooks record data. They do not automate analysis and review.</p></div>
+    <div class="card"><h3>Middle market underserved</h3><p>AI audit tools are built for large enterprises. Mid-size CA firms are left without a fit.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="alt" id="how"><div class="wrap">
+  <h2>Review-ready output, not raw data.</h2>
+  <p class="lede">Aquvera plugs into the data a firm already has: bank statements, invoices, ledgers, GST/TDS records and accounting software exports.</p>
+  <div class="grid g4" style="margin-top:32px">
+    <div class="card"><h3>Reconciliation</h3><p>Matches bank and ledger transactions. Only exceptions reach a person.</p></div>
+    <div class="card"><h3>Expense categorization</h3><p>Sorts expenses using rules specific to each firm.</p></div>
+    <div class="card"><h3>Compliance cross-checks</h3><p>Compares GST and TDS data with filed returns and surfaces gaps before deadlines.</p></div>
+    <div class="card"><h3>First-draft reports</h3><p>Prepares variance analysis and MIS in the format the firm already uses.</p></div>
+  </div>
+  <h3 style="margin-top:56px">From raw data to finalized output in five steps</h3>
+  <ol class="steps grid g5">
+    <li><b>Connect data</b><p>The firm uploads or links statements, ledgers, invoices and GST/TDS records.</p></li>
+    <li><b>AI processes</b><p>Aquvera reconciles, categorizes, cross-checks and drafts.</p></li>
+    <li><b>Exceptions flagged</b><p>Anomalies appear with a confidence score and source trace.</p></li>
+    <li class="h"><b>Human review</b><p>The accountant or auditor approves, edits or overrides each result.</p></li>
+    <li><b>Finalize and learn</b><p>Approved output is final. Corrections improve future accuracy.</p></li>
+  </ol>
+</div></section>
+
+<!-- ============ TRUST ============ -->
+<section id="trust"><div class="wrap">
+  <h2>Accountability is built into every output.</h2>
+  <p class="lede">In compliance work, accountability matters more than speed. Nothing is finalized without a human sign-off.</p>
+  <div class="grid g4" style="margin-top:32px">
+    <div class="card"><h3>Validation</h3><p>Every AI output passes built-in checks before a person sees it.</p></div>
+    <div class="card"><h3>Source traceability</h3><p>Each figure links to the exact data it came from.</p></div>
+    <div class="card"><h3>Review workflow</h3><p>The professional approves, edits or overrides before anything is final.</p></div>
+    <div class="card"><h3>Learning loop</h3><p>Corrections improve accuracy on recurring patterns for each firm.</p></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><h3>Guided AI</h3><p>Language models work inside structured prompts and validation rules for Indian accounting formats, not open-ended generation.</p></div>
+    <div class="card"><h3>Security</h3><p>Encryption at rest and in transit, strict access control, and data stored within India.</p></div>
+    <div class="card"><h3>Indian compliance built in</h3><p>GST, TDS, Ind AS and Companies Act reporting are part of the product from the start.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ PURCHASE PLANS ============ -->
+<section class="alt" id="plans"><div class="wrap">
+  <h2>Explore purchase plans</h2>
+  <p class="lede">Pick the plan that fits your firm. Every plan includes mandatory human review and source traceability. Contact us for a quote.</p>
+
+  <div class="grid g3 plans">
+    <article class="card plan">
+      <h3>Starter</h3>
+      <p class="for">One workflow, small firm.</p>
+      <div class="price">Custom quote</div>
+      <ul>
+        <li>One automated workflow, such as reconciliation</li>
+        <li>Human review and sign-off on every output</li>
+        <li>Source trace for each figure</li>
+        <li>Upload-based data intake</li>
+      </ul>
+      <button class="btn ghost full" data-enquire="Starter">Contact to enquire</button>
+    </article>
+
+    <article class="card plan pop">
+      <span class="badge">Most chosen by mid-size firms</span>
+      <h3>Growth</h3>
+      <p class="for">Multiple workflows, mid-size firm.</p>
+      <div class="price">Custom quote</div>
+      <ul>
+        <li>Reconciliation, categorization and compliance cross-checks</li>
+        <li>First-draft MIS and variance reports in your format</li>
+        <li>Firm-specific rules and learning loop</li>
+        <li>Optional onboarding for data migration and templates</li>
+      </ul>
+      <button class="btn full" data-enquire="Growth">Contact to enquire</button>
+    </article>
+
+    <article class="card plan">
+      <h3>Enterprise</h3>
+      <p class="for">Custom integrations, in-house teams.</p>
+      <div class="price">Custom quote</div>
+      <ul>
+        <li>All Growth workflows</li>
+        <li>Custom integrations with your finance stack</li>
+        <li>Built for in-house finance and internal audit teams</li>
+        <li>Guided rollout across teams</li>
+      </ul>
+      <button class="btn ghost full" data-enquire="Enterprise">Contact to enquire</button>
+    </article>
+  </div>
+
+  <div class="personal">
+    <div>
+      <h3>Want a personal plan?</h3>
+      <p>Connect with an individual on our team. Tell us how your firm works and we will shape a plan around it.</p>
+    </div>
+    <button class="btn light" data-enquire="personal">Talk to an individual</button>
+  </div>
+  <p class="note">Monthly or annual subscription, plus an optional one-time onboarding fee for data migration and report template setup.</p>
+
+  <h3 class="calc-head">Priced on the value we create, not per seat.</h3>
+  <p class="lede" style="margin-top:8px">We charge roughly 25 to 40% of the cost a firm saves, so the return is clear to a partner or CFO. Adjust the inputs to see it.</p>
+  <div class="calc">
+    <div>
+      <label for="fte">Analyst capacity freed <output id="fteo">2</output></label>
+      <input type="range" id="fte" min="1" max="10" step="1" value="2">
+      <label for="sal">Analyst salary, Rs lakh per year <output id="salo">7</output></label>
+      <input type="range" id="sal" min="3" max="15" step="0.5" value="7">
+      <p class="note">Example: two analysts at about Rs 6 to 8 lakh each.</p>
+    </div>
+    <div class="out" aria-live="polite">
+      <small>Firm saves per year</small><div class="big" id="sv">Rs 14 lakh</div>
+      <small style="margin-top:18px">Aquvera subscription (25 to 40% of savings)</small><div class="big" id="fee">Rs 3.5 to 5.6 lakh</div>
+      <small style="margin-top:18px;margin-bottom:0">Firm keeps <b id="net" style="color:#fff">Rs 8.4 to 10.5 lakh</b> a year</small>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ MARKET ============ -->
+<section id="market"><div class="wrap">
+  <h2>A focused slice of a large spend pool.</h2>
+  <p class="lede">Rough estimates for India, shown as direction rather than precision.</p>
+  <div class="mk">
+    <div class="card"><p>Total market</p><b>Rs 8,000 to 12,000 crore</b><p>Spend on accounting and audit staffing and compliance services in India.</p></div>
+    <div class="card"><p>Serviceable market</p><b>Rs 1,500 to 2,500 crore</b><p>Mid-size firms and finance teams open to AI-assisted tools.</p></div>
+    <div class="card som"><p>Obtainable, years 1 to 3</p><b>Rs 15 to 40 crore</b><p>Direct sales to 100 to 300 firms.</p></div>
+  </div>
+  <h3 style="margin-top:48px">Start where the pain is sharpest, then expand</h3>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><h3>Now: mid-size CA and audit firms</h3><p>20 to 200 staff, serving SME and mid-market clients. Highest pain, direct sales, fastest feedback.</p></div>
+    <div class="card"><h3>Next: in-house finance teams</h3><p>Finance and internal audit at companies with about Rs 100 to 2,000 crore turnover. Same workflows, inside the company.</p></div>
+    <div class="card"><h3>Later: shared-service centres and BPOs</h3><p>Corporate shared services, BPO/KPO accounting firms, and similar markets outside India.</p></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Alternative</th><th>Examples</th><th>What Aquvera adds</th></tr>
+    <tr><td>Bookkeeping software</td><td>Tally, Zoho Books, QuickBooks</td><td>They record data. Aquvera automates analysis, anomaly detection and report drafting.</td></tr>
+    <tr><td>Enterprise AI-audit tools</td><td>Big-4 style platforms</td><td>Built and priced for large enterprises. Aquvera is scoped for the mid-market.</td></tr>
+    <tr><td>Generic AI tools</td><td>ChatGPT, Copilot</td><td>No compliance formats and no audit trail. Aquvera has both.</td></tr>
+    <tr><td>Accounting BPOs</td><td>Regional providers</td><td>Still depend on headcount. Aquvera reduces the work itself.</td></tr>
+  </table></div>
+</div></section>
+
+<!-- ============ CONTACT ============ -->
+<section class="alt" id="contact"><div class="wrap">
+  <h2>Contact us</h2>
+  <p class="lede">Call, message or email. We will get back to you about plans, demos or a personal plan.</p>
+  <div class="contact">
+    <ul class="clist">
+      <li><a data-tel href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <span><small>Call us</small><b data-phone-text></b></span></a></li>
+      <li><a data-wa target="_blank" rel="noopener" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <span><small>WhatsApp</small><b>Message us</b></span></a></li>
+      <li><a data-mail href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span><small>Email</small><b data-mail-text></b></span></a></li>
+      <li><a data-linkedin target="_blank" rel="noopener" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.65 4.78 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.63 0-1.88 1.27-1.88 2.6V21h-4z"/></svg>
+        <span><small>Follow</small><b>LinkedIn</b></span></a></li>
+      <li><a data-instagram target="_blank" rel="noopener" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+        <span><small>Follow</small><b>Instagram</b></span></a></li>
+    </ul>
+
+    <form class="card" id="contactForm">
+      <label>Your name<input name="name" required autocomplete="name"></label>
+      <label>Firm or company<input name="firm" autocomplete="organization"></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+      <label>I am interested in
+        <select name="interest">
+          <option>Starter plan</option>
+          <option>Growth plan</option>
+          <option>Enterprise plan</option>
+          <option>A personal plan</option>
+          <option>Something else</option>
+        </select>
+      </label>
+      <label>Message<textarea name="message" required></textarea></label>
+      <button class="btn full" type="submit">Send enquiry</button>
+      <p class="hint">This opens your email app with the message ready to send to us.</p>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="logo" href="#top">AQUVERA</a>
+        <p>AI-powered financial operations for accounting and audit teams. The professional keeps the final say.</p>
+        <div class="social">
+          <a data-linkedin target="_blank" rel="noopener" href="#" aria-label="Aquvera on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.65 4.78 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.63 0-1.88 1.27-1.88 2.6V21h-4z"/></svg></a>
+          <a data-instagram target="_blank" rel="noopener" href="#" aria-label="Aquvera on Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a data-software target="_blank" rel="noopener" href="#">Try our Aquvera software</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#trust">Trust</a></li>
+          <li><a href="#plans">Purchase plans</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a data-tel href="#"><span data-phone-text></span></a></li>
+          <li><a data-mail href="#"><span data-mail-text></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; <span id="year"></span> Aquvera. All rights reserved.</span>
+      <span>Market figures are directional estimates.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating call button, visible on phones -->
+<div class="fab"><button class="btn" data-enquire="">Contact to enquire</button></div>
+
+<!-- ============ ENQUIRY DIALOG ============ -->
+<dialog id="enquiry" aria-labelledby="dlgTitle">
+  <div class="dlg">
+    <button class="dlg-x" id="dlgClose" aria-label="Close">&times;</button>
+    <h3 id="dlgTitle">Contact us to enquire</h3>
+    <p style="color:var(--mute);margin-top:6px">Speak to us directly on this number.</p>
+    <a class="num" data-tel data-phone-text href="#"></a>
+    <div class="btns">
+      <a class="btn" data-tel href="#">Call now</a>
+      <a class="btn ghost" data-wa target="_blank" rel="noopener" href="#">Message on WhatsApp</a>
+    </div>
+    <div class="pp">
+      <b>Connect with an individual for a personal plan</b>
+      <p>Not sure which plan fits? Call or message us and an individual from our team will work with you on a personal plan.</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ==========================================================
+   Aquvera – site settings
+   Edit this file only. Everything else reads from here.
+   ========================================================== */
+window.AQUVERA = {
+  phoneDisplay: "+91 87007 31642",
+  phoneDial:    "+918700731642",   // used for tel: links
+  whatsapp:     "918700731642",    // country code + number, no "+"
+  email:        "aquveraai@gmail.com",
+
+  // TODO: paste the address of your live Aquvera software here.
+  // Every "Try our Aquvera software" link on the site uses this one value.
+  softwareUrl: "https://YOUR-USERNAME.github.io/aquvera/",
+
+  // TODO: replace these two with your real page links
+  linkedin:  "https://www.linkedin.com/",
+  instagram: "https://www.instagram.com/"
+};
+
+</script>
+<script>
+/* Aquvera – site behaviour */
+(function(){
+  const C = window.AQUVERA;
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+
+  /* ---------- Fill contact details from config.js ---------- */
+  $$("[data-phone-text]").forEach(e => e.textContent = C.phoneDisplay);
+  $$("[data-tel]").forEach(e => e.href = "tel:" + C.phoneDial);
+  $$("[data-wa]").forEach(e => e.href = "https://wa.me/" + C.whatsapp);
+  $$("[data-mail-text]").forEach(e => e.textContent = C.email);
+  $$("[data-mail]").forEach(e => e.href = "mailto:" + C.email);
+  $$("[data-software]").forEach(e => e.href = C.softwareUrl);
+  $$("[data-linkedin]").forEach(e => e.href = C.linkedin);
+  $$("[data-instagram]").forEach(e => e.href = C.instagram);
+  $("#year").textContent = new Date().getFullYear();
+
+  /* ---------- Mobile menu ---------- */
+  const burger = $("#burger"), menu = $("#menu");
+  burger.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open);
+  });
+  $$("#menu a").forEach(a => a.addEventListener("click", () => {
+    menu.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
+  }));
+
+  /* ---------- Enquiry dialog ---------- */
+  const dlg = $("#enquiry"), dlgTitle = $("#dlgTitle");
+  function openEnquiry(plan){
+    dlgTitle.textContent = plan ? "Enquire about the " + plan + " plan" : "Contact us to enquire";
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else window.location.href = "tel:" + C.phoneDial;   // very old browsers: go straight to the call
+  }
+  $$("[data-enquire]").forEach(b => b.addEventListener("click", () => openEnquiry(b.dataset.enquire)));
+  $("#dlgClose").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+  /* ---------- Contact form -> opens the visitor's email app ---------- */
+  $("#contactForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const subject = "Aquvera enquiry: " + f.get("interest");
+    const body = "Name: " + f.get("name") + "\nFirm / company: " + f.get("firm") +
+      "\nPhone: " + f.get("phone") + "\n\n" + f.get("message");
+    window.location.href = "mailto:" + C.email + "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  });
+
+  /* ---------- Sample reconciliation demo ---------- */
+  const data = [
+    {a:"HDFC 04 Mar: Rs 1,86,400 credit", b:"Ledger: two invoices, Rs 92,400 + Rs 94,000", c:87, w:"Split payment. Sum matches, reference does not.", t:"Bank stmt row 214 to Ledger vouchers 1187, 1191"},
+    {a:"ICICI 11 Mar: Rs 48,250 debit", b:"No ledger entry found", c:64, w:"Unmatched. Similar to vendor payments in Feb.", t:"Bank stmt row 389 | nearest: Ledger voucher 1302 (Rs 48,520)"},
+    {a:"TDS 26Q: Rs 21,000 deducted", b:"Filed return shows Rs 12,000", c:92, w:"Mismatch of Rs 9,000 before the filing deadline.", t:"TDS ledger row 41 to Filed 26Q, challan 0217"}
+  ];
+  const box = $("#exs"), fin = $("#fin"), msg = $("#msg");
+  let done = 0;
+  data.forEach((d, i) => {
+    const e = document.createElement("div");
+    e.className = "ex";
+    e.innerHTML = `<div class="row"><div><strong>${d.a}</strong><br>${d.b}</div><span class="conf">Confidence ${d.c}%</span></div><div class="why">${d.w}</div><div class="trace" id="t${i}">Source: ${d.t}</div><div class="acts"><button class="p" data-a="Approved">Approve</button><button data-a="Edited">Edit</button><button data-a="Overridden">Override</button><button data-a="trace" aria-expanded="false">Show source</button></div>`;
+    e.querySelector(".acts").addEventListener("click", ev => {
+      const b = ev.target.closest("button"); if (!b) return;
+      const a = b.dataset.a;
+      if (a === "trace") {
+        const t = document.getElementById("t" + i);
+        const on = t.classList.toggle("on");
+        b.setAttribute("aria-expanded", on);
+        b.textContent = on ? "Hide source" : "Show source";
+        return;
+      }
+      const first = !e.classList.contains("done");
+      e.classList.add("done");
+      e.classList.toggle("over", a === "Overridden");
+      e.querySelector(".acts").innerHTML = `<span class="verdict">${a} by reviewer. Logged for the learning loop.</span>`;
+      if (first) { done++; if (done === data.length) { fin.disabled = false; msg.textContent = "All exceptions reviewed."; } }
+    });
+    box.appendChild(e);
+  });
+  fin.addEventListener("click", () => {
+    fin.disabled = true;
+    fin.textContent = "Finalized with human sign-off";
+    msg.textContent = "Nothing is final until a professional signs off, and that has happened.";
+  });
+
+  /* ---------- Savings calculator ---------- */
+  const f = $("#fte"), s = $("#sal");
+  const r1 = n => Math.round(n * 10) / 10;
+  function calc(){
+    const v = f.value * s.value;
+    $("#fteo").textContent = f.value;
+    $("#salo").textContent = s.value;
+    $("#sv").textContent = "Rs " + r1(v) + " lakh";
+    $("#fee").textContent = "Rs " + r1(v * .25) + " to " + r1(v * .4) + " lakh";
+    $("#net").textContent = "Rs " + r1(v * .6) + " to " + r1(v * .75) + " lakh";
+  }
+  f.addEventListener("input", calc); s.addEventListener("input", calc); calc();
+})();
+
+</script>
+</body>
+</html>
